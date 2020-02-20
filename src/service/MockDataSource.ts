@@ -7,7 +7,8 @@ export default class MockDataSource implements FeedDataSource {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getFeedItems(start: number, end: number): Promise<FeedItem[]> {
     return new Promise((resolve) => {
-      resolve(this.mockFeedItems)
+      // Timeout for mock data source to simulate network delay
+      setTimeout(() => resolve(this.mockFeedItems), 1000)
     })
   }
 
