@@ -1,20 +1,31 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <FeedList/>
+    <FeedList :items='feedItems'/>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import FeedList from './components/FeedList.vue'
+import FeedItem from './model/FeedItem'
+import FeedItemService from './service/FeedItemService'
 
 @Component({
   components: {
     FeedList
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  private feedItems: FeedItem[] = []
+
+  created() {
+    const feedItemService = new FeedItemService()
+    feedItemService.getFeedItems(-1, -1).then((res) => {
+      this.feedItems = res
+    })
+  }
+}
 </script>
 
 <style>

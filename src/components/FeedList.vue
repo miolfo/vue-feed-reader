@@ -1,15 +1,20 @@
 <template>
   <div class="hello">
-
+    {{items}}
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import FeedItem from '../model/FeedItem'
 
 @Component
 export default class FeedList extends Vue {
-  @Prop() private msg!: string;
+  @Prop() private items!: FeedItem[];
+
+  created() {
+    console.log()
+  }
 }
 </script>
 
