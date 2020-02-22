@@ -1,20 +1,21 @@
 <template>
   <div class="hello">
-    {{items}}
+    <FeedItemView v-for="item in items" :key="item.id" :item="item"/>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import FeedItem from '../model/FeedItem'
+import FeedItemView from './FeedItemView.vue'
 
-@Component
+@Component({
+  components: {
+    FeedItemView
+  }
+})
 export default class FeedList extends Vue {
   @Prop() private items!: FeedItem[];
-
-  created() {
-    console.log()
-  }
 }
 </script>
 

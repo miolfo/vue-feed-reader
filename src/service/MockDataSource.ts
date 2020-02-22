@@ -17,6 +17,7 @@ export default class MockDataSource implements FeedDataSource {
     for (let i = 0; i < 25; i++) {
       const mockFeedItem = new FeedItem()
       mockFeedItem.setTitle('Mock title that has some text ' + i)
+      mockFeedItem.setId(i.toString())
       this.mockFeedItems.push(mockFeedItem)
     }
   }
