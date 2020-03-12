@@ -1,12 +1,10 @@
-import Comment from './Comment'
-
-export default class FeedItem {
-  private title: string;
+export default class Comment {
+  private content: string;
   private id: string;
   private comments: Comment[];
 
   constructor() {
-    this.title = ''
+    this.content = ''
     this.id = ''
     this.comments = []
   }
@@ -15,23 +13,23 @@ export default class FeedItem {
     this.id = id
   }
 
-  public setTitle(title: string): void {
-    this.title = title
+  public setContent(title: string): void {
+    this.content = title
   }
 
   public getId(): string {
     return this.id
   }
 
-  public getTitle(): string {
-    return this.title
-  }
-
-  public getComments(): Comment[] {
-    return this.comments
+  public getContent(): string {
+    return this.content
   }
 
   public setComments(comments: Comment[]): void {
     this.comments = comments
+  }
+
+  public getComments(): Comment[] {
+    return this.comments
   }
 }
