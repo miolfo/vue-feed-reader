@@ -1,14 +1,21 @@
 <template>
   <div>
-    ListOfCommentsHere
+    <ul>
+      <CommentView v-for="comment in comments.slice(0, 3)" :key="comment.id" :comment="comment"/>
+    </ul>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import Comment from '../model/Comment'
+import CommentView from './CommentView.vue'
 
-@Component
+@Component({
+  components: {
+    CommentView
+  }
+})
 export default class CommentPeek extends Vue {
   @Prop() private comments!: Comment[];
 }
