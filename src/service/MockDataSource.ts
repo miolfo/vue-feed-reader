@@ -13,6 +13,14 @@ export default class MockDataSource implements FeedDataSource {
     })
   }
 
+  getFeedItem(id: string): Promise<FeedItem> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(this.mockFeedItems.find((item) => item.getId() === id))
+      }, 1500)
+    })
+  }
+
   constructor() {
     this.mockFeedItems = []
     for (let i = 0; i < 25; i++) {

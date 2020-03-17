@@ -1,17 +1,17 @@
 <template>
   <div class="hello">
-    <FeedItemView v-for="item in items" :key="item.id" :item="item"/>
+    <FeedItemListView v-for="item in items" :key="item.id" :item="item"/>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import FeedItem from '../model/FeedItem'
-import FeedItemView from './FeedItemView.vue'
+import FeedItemListView from './FeedItemListView.vue'
 
 @Component({
   components: {
-    FeedItemView
+    FeedItemListView
   }
 })
 export default class FeedList extends Vue {

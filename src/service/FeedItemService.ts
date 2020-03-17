@@ -13,4 +13,8 @@ export default class FeedItemService {
   public getFeedItems(start: number, end: number): Promise<FeedItem[]> {
     return this.feedDataSource.getFeedItems(-1, -1)
   }
+
+  public getFeedItem(id: string): Promise<FeedItem> {
+    return this.feedDataSource.getFeedItem(id)
+  }
 }
