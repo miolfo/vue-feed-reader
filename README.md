@@ -1,5 +1,7 @@
 # vue-feed-reader
 
+A feed reader (to be used with reddit, hacker news etc....) to practice frontend development with Vue.js
+
 ## Project setup
 ```
 npm install
