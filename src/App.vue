@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <FeedList :items='feedItems'/>
+  <div id="main-app-container">
+    <router-view/>
   </div>
 </template>
 

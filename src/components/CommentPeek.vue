@@ -3,6 +3,9 @@
     <ul>
       <CommentView v-for="comment in comments.slice(0, 3)" :key="comment.id" :comment="comment"/>
     </ul>
+    <a href="#">
+      Show all
+    </a>
   </div>
 </template>
 
