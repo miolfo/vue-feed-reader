@@ -1,7 +1,7 @@
 <template>
   <div class="feed-list-item" v-on:click="toggleCommentPeek">
     {{item.title}}
-    <CommentPeek v-if="peekComments" :comments="item.comments"/>
+    <CommentPeek v-if="peekComments" :comments="item.comments" :itemId="item.id"/>
   </div>
 </template>
 

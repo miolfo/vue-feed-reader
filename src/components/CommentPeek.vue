@@ -3,9 +3,9 @@
     <ul>
       <CommentView v-for="comment in comments.slice(0, 3)" :key="comment.id" :comment="comment"/>
     </ul>
-    <a href="#">
+    <router-link :to="{path: `/item/${itemId}`}">
       Show all
-    </a>
+    </router-link>
   </div>
 </template>
 
@@ -21,5 +21,6 @@ import CommentView from './CommentView.vue'
 })
 export default class CommentPeek extends Vue {
   @Prop() private comments!: Comment[];
+  @Prop() private itemId!: string;
 }
 </script>
