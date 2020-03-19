@@ -1,6 +1,13 @@
 <template>
-  <div id="main-app-container">
-    <router-view/>
+  <div>
+    <b-navbar type="dark" variant="dark">
+      <b-nav-text>
+        Vue Feed Reader v0.1
+      </b-nav-text>
+    </b-navbar>
+    <div id="main-app-container" class="main-content">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -9,10 +16,12 @@ import { Component, Vue } from 'vue-property-decorator'
 import FeedList from './components/FeedList.vue'
 import FeedItem from './model/FeedItem'
 import FeedItemService from './service/FeedItemService'
+import { BNavbar } from 'bootstrap-vue'
 
 @Component({
   components: {
-    FeedList
+    FeedList,
+    BNavbar
   }
 })
 export default class App extends Vue {
@@ -28,6 +37,8 @@ export default class App extends Vue {
 </script>
 
 <style>
+  @import './assets/css/main.css';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
