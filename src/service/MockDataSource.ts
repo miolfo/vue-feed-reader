@@ -9,7 +9,10 @@ export default class MockDataSource implements FeedDataSource {
   getFeedItems(start: number, end: number): Promise<FeedItem[]> {
     return new Promise((resolve) => {
       // Timeout for mock data source to simulate network delay
-      setTimeout(() => resolve(this.mockFeedItems), 1000)
+      setTimeout(() => {
+        const items = this.mockFeedItems.slice(start, end)
+        resolve(items)
+      }, 1000)
     })
   }
 
@@ -23,7 +26,7 @@ export default class MockDataSource implements FeedDataSource {
 
   constructor() {
     this.mockFeedItems = []
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 100; i++) {
       const mockFeedItem = new FeedItem()
       mockFeedItem.setTitle('Mock title that has some text ' + i)
       mockFeedItem.setId(i.toString())

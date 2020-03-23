@@ -15,7 +15,6 @@
 import { Component, Vue } from 'vue-property-decorator'
 import FeedList from './components/FeedList.vue'
 import FeedItem from './model/FeedItem'
-import FeedItemService from './service/FeedItemService'
 import { BNavbar } from 'bootstrap-vue'
 
 @Component({
@@ -26,13 +25,6 @@ import { BNavbar } from 'bootstrap-vue'
 })
 export default class App extends Vue {
   private feedItems: FeedItem[] = []
-
-  created() {
-    const feedItemService = new FeedItemService()
-    feedItemService.getFeedItems(-1, -1).then((res) => {
-      this.feedItems = res
-    })
-  }
 }
 </script>
 

@@ -11,7 +11,7 @@ export default class FeedItemService {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getFeedItems(start: number, end: number): Promise<FeedItem[]> {
-    return this.feedDataSource.getFeedItems(-1, -1)
+    return this.feedDataSource.getFeedItems(start, end)
   }
 
   public getFeedItem(id: string): Promise<FeedItem> {
