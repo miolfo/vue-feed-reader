@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <b-list-group>
-      <FeedItemListView v-for="item in items" :key="item.id" :item="item"/>
+      <FeedItemListView v-for="(item, index) in items" :key="item.id" :item="item" :index="index"/>
     </b-list-group>
   </div>
 </template>
