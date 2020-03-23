@@ -1,8 +1,10 @@
 <template>
-  <b-list-group-item class="feed-list-item" v-on:click="toggleCommentPeek">
+  <div>
+  <b-list-group-item class="feed-list-item" v-on:click="toggleCommentPeek" v-bind:class="{active: peekComments}">
     {{item.title}}
-    <CommentPeek v-if="peekComments" :comments="item.comments" :itemId="item.id"/>
   </b-list-group-item>
+  <CommentPeek v-if="peekComments" :comments="item.comments" :itemId="item.id"/>
+  </div>
 </template>
 
 <script lang="ts">
@@ -21,8 +23,23 @@ export default class FeedItemListView extends Vue {
 
   private peekComments = false
 
+  mounted() {
+    this.$root.$on('toggled-peek-comments-on', () => {
+      this.peekComments = false
+    })
+  }
+
   toggleCommentPeek() {
+    if (!this.peekComments) {
+      this.$root.$emit('toggled-peek-comments-on')
+    }
     this.peekComments = !this.peekComments
   }
 }
 </script>
+
+<style scoped>
+  .feed-list-item {
+    cursor: pointer;
+  }
+</style>
