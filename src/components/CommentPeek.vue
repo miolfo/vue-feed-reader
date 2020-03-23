@@ -4,7 +4,7 @@
       <CommentView v-for="comment in comments.slice(0, 3)" :key="comment.id" :comment="comment"/>
     </b-list-group>
     <router-link :to="{path: `/item/${itemId}`}" class=link-small>
-      Show all
+      Show all {{countComments()}}
     </router-link>
   </div>
 </template>
@@ -14,6 +14,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import Comment from '../model/Comment'
 import CommentView from './CommentView.vue'
 import { BListGroup } from 'bootstrap-vue'
+import ReaderUtil from '../util/ReaderUtil'
 
 @Component({
   components: {
@@ -24,6 +25,10 @@ import { BListGroup } from 'bootstrap-vue'
 export default class CommentPeek extends Vue {
   @Prop() private comments!: Comment[];
   @Prop() private itemId!: string;
+
+  countComments(): number {
+    return ReaderUtil.countCommentsNested(this.comments)
+  }
 }
 </script>
 

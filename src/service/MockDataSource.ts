@@ -28,21 +28,32 @@ export default class MockDataSource implements FeedDataSource {
       mockFeedItem.setTitle('Mock title that has some text ' + i)
       mockFeedItem.setId(i.toString())
       mockFeedItem.setComments(this.generateCommentsWithSubcomments())
+      mockFeedItem.setDate(this.getRandomDate(1440))
       this.mockFeedItems.push(mockFeedItem)
     }
   }
 
+  private getRandomDate(maxMinutesAgo: number): Date {
+    const minutesAgo = Math.floor(Math.random() * maxMinutesAgo)
+    return new Date(new Date().getTime() - (minutesAgo * 60000))
+  }
+
   private generateCommentsWithSubcomments(): Comment[] {
     const comments: Comment[] = []
+    let runningId = 0
     for (let i = 0; i < 25; i++) {
       const mainComment = new Comment()
-      mainComment.setId(i.toString())
+      runningId++
+      mainComment.setId(runningId.toString())
       mainComment.setContent('Mock comment with some text ' + i)
+      mainComment.setDate(this.getRandomDate(1440))
       const subComments: Comment[] = []
-      for (let j = 0; j < Math.floor(Math.random() * 10); j++) {
+      for (let j = 0; j < Math.floor(Math.random() * 10) + 1; j++) {
         const subComment = new Comment()
-        subComment.setId(i.toString() + j.toString())
+        runningId++
+        subComment.setId(runningId.toString())
         subComment.setContent('Mock reply with some text ' + j)
+        subComment.setDate(this.getRandomDate(1440))
         subComments.push(subComment)
       }
       mainComment.setComments(subComments)
