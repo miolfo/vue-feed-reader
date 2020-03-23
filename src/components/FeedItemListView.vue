@@ -2,6 +2,14 @@
   <div>
   <b-list-group-item class="feed-list-item" v-on:click="toggleCommentPeek" v-bind:class="{active: peekComments}">
     {{item.title}}
+    <br/>
+    <span class="text-small">
+      {{momentsAgo()}}
+    </span>
+    <br/>
+    <span class="text-small">
+      {{countComments()}} replies
+    </span>
   </b-list-group-item>
   <CommentPeek v-if="peekComments" :comments="item.comments" :itemId="item.id"/>
   </div>
@@ -12,6 +20,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import FeedItem from '../model/FeedItem'
 import CommentPeek from './CommentPeek.vue'
 import { BListGroupItem } from 'bootstrap-vue'
+import ReaderUtil from '../util/ReaderUtil'
+import moment from 'moment'
+
 @Component({
   components: {
     CommentPeek,
@@ -35,6 +46,14 @@ export default class FeedItemListView extends Vue {
     }
     this.peekComments = !this.peekComments
   }
+
+  countComments(): number {
+    return ReaderUtil.countCommentsNested(this.item.getComments())
+  }
+
+  momentsAgo(): string {
+    return moment(this.item.getDate()).fromNow()
+  }
 }
 </script>
 
@@ -42,4 +61,5 @@ export default class FeedItemListView extends Vue {
   .feed-list-item {
     cursor: pointer;
   }
+
 </style>

@@ -3,9 +3,13 @@
       <span>
         {{comment.content}}
       </span>
-      <br>
+      <br/>
       <span class="text-small">
-        {{comment.comments.length}} replies
+        {{momentsAgo()}}
+      </span>
+      <br/>
+      <span class="text-small">
+        {{countSubComments()}} replies
       </span>
   </b-list-group-item>
 </template>
@@ -14,6 +18,8 @@
 import Comment from '../model/Comment'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { BListGroupItem } from 'bootstrap-vue'
+import ReaderUtil from '../util/ReaderUtil'
+import moment from 'moment'
 
 @Component({
   components: {
@@ -22,6 +28,14 @@ import { BListGroupItem } from 'bootstrap-vue'
 })
 export default class CommentView extends Vue {
   @Prop() private comment!: Comment;
+
+  countSubComments(): number {
+    return ReaderUtil.countCommentsNested(this.comment.getComments())
+  }
+
+  momentsAgo(): string {
+    return moment(this.comment.getDate()).fromNow()
+  }
 }
 </script>
 
