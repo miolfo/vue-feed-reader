@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <b-list-group>
-      <FeedItemListView v-for="(item, index) in items" :key="item.id" :item="item" :index="index"/>
+      <FeedItemListView v-for="(item, index) in items" :key="item.id" :item="item" :index="index + indexOffset"/>
     </b-list-group>
   </div>
 </template>
@@ -22,5 +22,6 @@ import { BListGroup, BButtonGroup, BButton } from 'bootstrap-vue'
 })
 export default class FeedList extends Vue {
   @Prop() private items!: FeedItem[];
+  @Prop() private indexOffset!: number
 }
 </script>

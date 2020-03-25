@@ -1,6 +1,6 @@
 <template>
   <div id="feed-reader">
-    <FeedList :items="feedItems"/>
+    <FeedList :items="feedItems" :indexOffset="page * count"/>
     <div class="pagination-buttons">
       <b-button-group>
         <b-button v-on:click="prevPage" v-bind:disabled="prevDisabled">Previous page</b-button>
