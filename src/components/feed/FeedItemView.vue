@@ -1,23 +1,33 @@
 <template>
   <div>
     <div class="feed-item-view" v-if="itemLoaded">
-      {{item.getTitle()}}
+      <ItemContent :item="item"/>
+      <ItemComments :item="item"/>
     </div>
     <div class="feed-item-error" v-else-if="errorLoadingItem">
       Error loading item
     </div>
     <div class="feed-item-loading" v-else>
-      Loading item
+      <Spinner/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import FeedItem from '../model/FeedItem'
+import FeedItem from '../../model/FeedItem'
 import FeedItemService from '@/service/FeedItemService'
+import Spinner from '../common/Spinner.vue'
+import ItemContent from './ItemContent.vue'
+import ItemComments from './ItemComments.vue'
 
-@Component
+@Component({
+  components: {
+    Spinner,
+    ItemContent,
+    ItemComments
+  }
+})
 export default class FeedItemView extends Vue {
   private item!: FeedItem;
   private itemLoaded = false

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import FeedReader from './components/FeedReader.vue'
-import FeedItemView from './components/FeedItemView.vue'
+import FeedItemView from './components/feed/FeedItemView.vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
