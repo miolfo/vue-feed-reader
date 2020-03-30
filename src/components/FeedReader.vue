@@ -1,6 +1,7 @@
 <template>
   <div id="feed-reader">
-    <FeedList :items="feedItems" :indexOffset="page * count"/>
+    <Spinner v-if="loading"/>
+    <FeedList v-else :items="feedItems" :indexOffset="page * count"/>
     <div class="pagination-buttons">
       <b-button-group>
         <b-button v-on:click="prevPage" v-bind:disabled="prevDisabled">Previous page</b-button>
@@ -16,10 +17,12 @@ import { Component, Vue } from 'vue-property-decorator'
 import FeedList from './FeedList.vue'
 import FeedItem from '../model/FeedItem'
 import FeedItemService from '../service/FeedItemService'
+import Spinner from './common/Spinner.vue'
 
 @Component({
   components: {
-    FeedList
+    FeedList,
+    Spinner
   }
 })
 export default class FeedReader extends Vue {
@@ -28,11 +31,13 @@ export default class FeedReader extends Vue {
   private readonly count = 10
   private page = 0
   private prevDisabled = true
+  private loading = true
   private readonly feedItemService = new FeedItemService()
 
   created() {
     this.feedItemService.getFeedItems(0, this.count).then((res) => {
       this.feedItems = res
+      this.loading = false
     })
   }
 
@@ -41,10 +46,12 @@ export default class FeedReader extends Vue {
     if (this.page > 0) {
       this.prevDisabled = false
     }
+    this.loading = true
     const start = this.page * this.count
     const end = start + this.count
     this.feedItemService.getFeedItems(start, end).then((res) => {
       this.feedItems = res
+      this.loading = false
     })
   }
 
@@ -53,10 +60,12 @@ export default class FeedReader extends Vue {
     if (this.page < 1) {
       this.prevDisabled = true
     }
+    this.loading = true
     const start = this.page * this.count
     const end = start + this.count
     this.feedItemService.getFeedItems(start, end).then((res) => {
       this.feedItems = res
+      this.loading = false
     })
   }
 }
