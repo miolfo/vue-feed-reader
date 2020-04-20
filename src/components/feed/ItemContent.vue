@@ -1,6 +1,6 @@
 <template>
   <div>
-    Here is to be content
+    {{item.getContent().getTextContent()}}
   </div>
 </template>
 

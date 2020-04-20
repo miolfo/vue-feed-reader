@@ -2,6 +2,8 @@ import FeedDataSource from './FeedDataSource'
 import FeedItem from '../model/FeedItem'
 import Comment from '../model/Comment'
 import LoremIpsumUtil from '@/util/LoremIpsumUtil'
+import Content from '@/model/Content'
+import { FeedContentType } from '@/model/FeedContentType'
 
 export default class MockDataSource implements FeedDataSource {
   private mockFeedItems: FeedItem[]
@@ -34,8 +36,16 @@ export default class MockDataSource implements FeedDataSource {
       mockFeedItem.setId(i.toString())
       mockFeedItem.setComments(this.generateCommentsWithSubcomments())
       mockFeedItem.setDate(this.getRandomDate(1440))
+      mockFeedItem.setContent(this.getRandomContent())
       this.mockFeedItems.push(mockFeedItem)
     }
+  }
+
+  private getRandomContent(): Content {
+    const loremIpsumUtil = new LoremIpsumUtil()
+    const content = new Content(FeedContentType.TEXT)
+    content.setTextContent(loremIpsumUtil.getRandomSentence(Math.floor(Math.random() * 100) + 50))
+    return content
   }
 
   private getRandomDate(maxMinutesAgo: number): Date {
